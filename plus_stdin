@@ -9,9 +9,18 @@ def tonum(s):
     except:
         return float(s)
 
+<<<<<<< HEAD
     ans = 0
     for line in sys.stdin:
         line = line.rstrip()
         ans += tonum(line)
+=======
+    
+ans = 0
+for line in sys.stdin:
+    line = line.rstrip()
+    ans += tonum(line)
+
+>>>>>>> f3cbf349eda166736d494637ac53e1affca8225c
 
 print(ans)
