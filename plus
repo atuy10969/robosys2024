@@ -7,11 +7,11 @@ def tonum(s):
     except:
         return float(s)
 
-    
 ans = 0
 for line in sys.stdin:
     line = line.rstrip()
-    ans += tonum(line)
-
+    for num in line.split():  # 各行の数値をスペースで分割して処理
+        ans += tonum(num)
 
 print(ans)
+
