@@ -20,38 +20,38 @@ out=$(echo | ./plus)
 [ "${out}" = "" ] || ng "$LINENO"
 
 # `average` のテスト
-out=$(seq 5 | ./average)
+out=$(seq 5 | ./average.txt)
 [ "${out}" = "3.0" ] || ng "$LINENO"  # 1+2+3+4+5 = 15; 平均は 15/5 = 3.0
 
-out=$(echo あ | ./average)
+out=$(echo あ | ./average.txt)
 [ "$?" = 1 ] || ng "$LINENO"
 [ "${out}" = "" ] || ng "$LINENO"
 
-out=$(echo | ./average)
+out=$(echo | ./average.txt)
 [ "$?" = 1 ] || ng "$LINENO"
 [ "${out}" = "" ] || ng "$LINENO"
 
 # 最大値のテスト
-out=$(seq 5 | ./max)
+out=$(seq 5 | ./max.txt)
 [ "${out}" = 5 ] || ng "$LINENO"  # 1, 2, 3, 4, 5 の最大値は 5
 
-out=$(echo あ | ./max)
+out=$(echo あ | ./max.txt)
 [ "$?" = 1 ] || ng "$LINENO"
 [ "${out}" = "" ] || ng "$LINENO"
 
-out=$(echo | ./max)
+out=$(echo | ./max.txt)
 [ "$?" = 1 ] || ng "$LINENO"
 [ "${out}" = "" ] || ng "$LINENO"
 
 # 最小値のテスト
-out=$(seq 5 | ./min)
+out=$(seq 5 | ./min.txt)
 [ "${out}" = 1 ] || ng "$LINENO"  # 1, 2, 3, 4, 5 の最小値は 1
 
-out=$(echo あ | ./min)
+out=$(echo あ | ./min.txt)
 [ "$?" = 1 ] || ng "$LINENO"
 [ "${out}" = "" ] || ng "$LINENO"
 
-out=$(echo | ./min)
+out=$(echo | ./min.txt)
 [ "$?" = 1 ] || ng "$LINENO"
 [ "${out}" = "" ] || ng "$LINENO"
 
