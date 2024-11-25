@@ -14,19 +14,19 @@ jobs:
       - name: チェックアウトリポジトリ
         uses: actions/checkout@v3
 
+      - name: 必要なファイルを確認
+        run: ls -la
+
       - name: 必要なファイルに実行権限を付与
         run: |
           chmod +x ./plus
-          chmod +x ./average.txt || true
-          chmod +x ./min.txt
-          chmod +x ./max.txt
+          chmod +x ./average || true
+          chmod +x ./min || true
+          chmod +x ./max || true
           chmod +x ./test.bash
-
-      - name: テスト前のファイル確認
-        run: ls -la
 
       - name: テストを実行
         run: |
-          set -e
-          bash -x ./test.bash
+          set -e  # エラー発生時に中断
+          bash -x ./test.bash  # デバッグ情報を表示
 
