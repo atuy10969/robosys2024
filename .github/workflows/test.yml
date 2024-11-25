@@ -1,25 +1,24 @@
-name: test        # ワークフローの名前
+name: Run Tests
 
-on: 
-  push:           # このワークフローをプッシュ時に実行
-  pull_request:   # プルリクエスト時にも実行
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 
-jobs:             # ジョブのリスト
-  test:           # testジョブ
-    runs-on: ubuntu-latest   # Ubuntu環境で実行
-    steps:                   # 手順
-    - uses: actions/checkout@v3  # コードをチェックアウトする
-    - name: Set up Python        # Python環境をセットアップ
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'    # 最新のPython 3.xを使用
+jobs:
+  test:
+    runs-on: ubuntu-latest
 
-    - name: Install dependencies  # 依存パッケージが必要な場合（今回は特に必要なし）
-      run: |
-        echo "No dependencies required"
+    steps:
+      - name: チェックアウトリポジトリ
+        uses: actions/checkout@v3
 
-    - name: Run tests             # テストを実行
-      run: |
-        chmod +x ./test.bash      # テストスクリプトに実行権限を付与
-        bash -xv ./test.bash      # テストスクリプトをデバッグモードで実行
+      - name: 必要なファイルに実行権限を付与
+        run: |
+          chmod +x ./plus
+          chmod +x ./average || true
+
+      - name: テストを実行
+        run: bash ./test.bash
 

@@ -1,49 +1,43 @@
 #!/bin/bash
 
-# エラーハンドリング関数
-ng() {
+ng () {
     echo "${1}行目が違うよ"
     res=1
 }
 
-res=0  # 初期値（成功を示す）
+res=0
 
-# 関数: Pythonスクリプトをテスト
-run_test() {
-    input="$1"           # 入力データ
-    expected_output="$2" # 期待される出力
-    line_number="$3"     # 行番号
+# `plus` のテスト
+out=$(seq 5 | ./plus)
+[ "${out}" = 15 ] || ng "$LINENO"
 
-    # 実際の出力を取得
-    output=$(printf "%s\n" "$input" | python3 kadai.py 2>/dev/null)
+out=$(echo あ | ./plus)
+[ "$?" = 1 ] || ng "$LINENO"
 
-    # 結果を比較
-    if [[ "$output" != "$expected_output" ]]; then
-        ng "$line_number"
-    fi
-}
+out=$(echo | ./plus)
+[ "$?" = 1 ] || ng "$LINENO"
 
-# テスト 1: 正常な数値リストの入力
-run_test "12 45 67 23 89" "入力された数値の中で一番大きい数は: 89" "$LINENO"
-run_test "12 45 67 23 89" "入力された数値の中で一番小さい数は: 12" "$LINENO"
-run_test "12 45 67 23 89" "入力された数値の平均値は: 47.2" "$LINENO"
+# `average` のテスト
+if [ -x ./average ]; then
+    out=$(seq 5 | ./average)
+    [ "${out}" = "3.0" ] || ng "$LINENO"
 
-# テスト 2: 空の入力
-run_test "" "" "$LINENO"
+    out=$(echo あ | ./average)
+    [ "$?" = 1 ] || ng "$LINENO"
 
-# テスト 3: 数値以外の入力
-run_test "abc" "" "$LINENO"
+    out=$(echo | ./average)
+    [ "$?" = 1 ] || ng "$LINENO"
+else
+    echo "average プログラムが見つかりません。" >&2
+    res=1
+fi
 
-# テスト 4: 単一の数値
-run_test "100" "入力された数値の中で一番大きい数は: 100" "$LINENO"
-run_test "100" "入力された数値の中で一番小さい数は: 100" "$LINENO"
-run_test "100" "入力された数値の平均値は: 100.0" "$LINENO"
-
-# テスト結果を出力
+# 結果を表示
 if [ "$res" = 0 ]; then
-    echo "全てのテストが成功しました！"
+    echo "すべてのテストが成功しました。"
 else
     echo "いくつかのテストが失敗しました。"
 fi
 
 exit $res
+

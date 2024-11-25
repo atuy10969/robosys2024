@@ -13,3 +13,4 @@ average = sum(number_list) / len(number_list)
 print("入力された数値の中で一番大きい数は:", max_number)
 print("入力された数値の中で一番小さい数は:", min_number)
 print("入力された数値の平均値は:", average)
+
