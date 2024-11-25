@@ -1,0 +1,23 @@
+#!/usr/bin/python3
+import sys
+
+def tonum(s):
+    try:
+        return int(s)
+    except:
+        return float(s)
+
+min_value = None
+
+for line in sys.stdin:
+    line = line.rstrip()
+    num = tonum(line)
+    
+    if min_value is None or num < min_value:
+        min_value = num
+
+if min_value is not None:
+    print(f"最小値: {min_value}")
+else:
+    print("入力がありません")
+

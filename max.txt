@@ -1,0 +1,23 @@
+#!/usr/bin/python3
+import sys
+
+def tonum(s):
+    try:
+        return int(s)
+    except:
+        return float(s)
+
+max_value = None
+
+for line in sys.stdin:
+    line = line.rstrip()
+    num = tonum(line)
+    
+    if max_value is None or num > max_value:
+        max_value = num
+
+if max_value is not None:
+    print(f"最大値: {max_value}")
+else:
+    print("入力がありません")
+
