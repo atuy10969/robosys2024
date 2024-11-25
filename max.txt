@@ -1,23 +1,16 @@
 #!/usr/bin/python3
 import sys
 
-def tonum(s):
-    try:
-        return int(s)
-    except:
-        return float(s)
+def parse_numbers(line):
+    return [float(num) for num in line.split()]
 
-max_value = None
-
+numbers = []
 for line in sys.stdin:
-    line = line.rstrip()
-    num = tonum(line)
-    
-    if max_value is None or num > max_value:
-        max_value = num
+    numbers.extend(parse_numbers(line.strip()))
 
-if max_value is not None:
-    print(f"最大値: {max_value}")
+if len(numbers) > 0:
+    print(max(numbers))
 else:
-    print("入力がありません")
+    print("Error: No numbers provided", file=sys.stderr)
+    sys.exit(1)
 
