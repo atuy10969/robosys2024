@@ -19,9 +19,9 @@ jobs:
       - name: 必要なファイルに実行権限を付与
         run: |
           chmod +x ./plus
-          chmod +x ./average
-          chmod +x ./min
-          chmod +x ./max
+          chmod +x ./average.txt
+          chmod +x ./min.txt
+          chmod +x ./max.txt
 
       # テストを実行
       - name: テストを実行
@@ -33,6 +33,6 @@ jobs:
         if: failure()
         run: |
           echo "テストが失敗しました。以下はデバッグ情報です:"
-          cat ./test.bash
+          cat ./test333.bash
           ls -l
 
