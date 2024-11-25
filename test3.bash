@@ -18,7 +18,7 @@ run_test() {
     output=$(printf "%s\n" "$input" | python3 kadai.py 2>/dev/null)
 
     # 結果を比較
-    if [[ "$output" != *"$expected_output"* ]]; then
+    if [[ "$output" != "$expected_output" ]]; then
         ng "$line_number"
     fi
 }
@@ -47,4 +47,3 @@ else
 fi
 
 exit $res
-
