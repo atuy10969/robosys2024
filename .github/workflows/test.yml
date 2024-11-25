@@ -20,13 +20,13 @@ jobs:
       - name: 必要なファイルに実行権限を付与
         run: |
           chmod +x ./plus
-          chmod +x ./average || true
-          chmod +x ./min || true
-          chmod +x ./max || true
-          chmod +x ./test.bash
+          chmod +x ./average.txt || true
+          chmod +x ./min.txt || true
+          chmod +x ./max.txt || true
+          chmod +x ./test3.bash
 
       - name: テストを実行
         run: |
           set -e  # エラー発生時に中断
-          bash -x ./test.bash  # デバッグ情報を表示
+          bash -x ./test3.bash  # デバッグ情報を表示
 
