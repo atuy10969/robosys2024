@@ -17,7 +17,9 @@ jobs:
       - name: 必要なファイルに実行権限を付与
         run: |
           chmod +x ./plus
-          chmod +x ./average || true
+          chmod +x ./average.txt || true
+          chmod +x ./min.txt
+          chmod +x ./max.txt
 
       - name: テストを実行
         run: bash ./test.bash
