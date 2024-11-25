@@ -11,28 +11,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # リポジトリをチェックアウト
       - name: チェックアウトリポジトリ
         uses: actions/checkout@v3
 
-      # 必要なファイルに実行権限を付与
       - name: 必要なファイルに実行権限を付与
         run: |
           chmod +x ./plus
-          chmod +x ./average.txt
+          chmod +x ./average.txt || true
           chmod +x ./min.txt
           chmod +x ./max.txt
+          chmod +x ./test.bash # test.bashの権限も付与
 
-      # テストを実行
+      - name: 現在のディレクトリ確認
+        run: pwd
+
+      - name: ファイル一覧確認
+        run: ls -la
+
       - name: テストを実行
-        run: |
-          bash ./test.bash || (echo "テストが失敗しました" && exit 1)
+        run: bash ./test.bash
 
-      # エラー時のログ確認（任意の追加ステップ）
       - name: エラー時のデバッグログを表示
         if: failure()
         run: |
-          echo "テストが失敗しました。以下はデバッグ情報です:"
-          cat ./test333.bash
-          ls -l
+          echo "テストに失敗しました。以下はデバッグ情報です："
+          ls -la
+          cat ./test.bash
 
