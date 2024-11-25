@@ -20,21 +20,13 @@ jobs:
           chmod +x ./average.txt || true
           chmod +x ./min.txt
           chmod +x ./max.txt
-          chmod +x ./test.bash # test.bashの権限も付与
+          chmod +x ./test.bash
 
-      - name: 現在のディレクトリ確認
-        run: pwd
-
-      - name: ファイル一覧確認
+      - name: テスト前のファイル確認
         run: ls -la
 
       - name: テストを実行
-        run: bash ./test.bash
-
-      - name: エラー時のデバッグログを表示
-        if: failure()
         run: |
-          echo "テストに失敗しました。以下はデバッグ情報です："
-          ls -la
-          cat ./test.bash
+          set -e
+          bash -x ./test.bash
 
