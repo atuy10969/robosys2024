@@ -1,12 +1,31 @@
-iname: test
-on: push
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3,7","3,8","3,9","3,10","3.11"]
+
     steps:
-    - uses: actions/checkout@v3
-    - name: All test
-      run: bash -xv ./test.bash
+      - name: チェックアウトリポジトリ
+        uses: actions/checkout@v3
+
+      - name: 必要なファイルを確認
+        run: ls -la
+
+      - name: 必要なファイルに実行権限を付与
+        run: |
+          chmod +x ./plus
+          chmod +x ./average.txt || true
+          chmod +x ./min.txt || true
+          chmod +x ./max.txt || true
+          chmod +x ./test3.bash
+
+      - name: テストを実行
+        run: |
+          set -e  # エラー発生時に中断
+          bash -x ./test3.bash  # デバッグ情報を表示
