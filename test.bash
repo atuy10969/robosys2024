@@ -1,4 +1,4 @@
-#!/bin/bash 
+i#!/bin/bash
 
 # ng関数を定義（エラー時に行番号を表示）
 ng () {
@@ -18,12 +18,12 @@ expected="入力された数値の中で一番大きい数は: 50
 [ "${out}" = "${expected}" ] || ng "$LINENO"
 
 # 無効な入力（文字列）を与えてエラーが発生するか確認
-out=$(echo "あ い う" | python3 kadai.py)
+out=$(echo "10 20 あ 40 50" | python3 kadai.py)
 [ "$?" = 1 ] || ng "$LINENO"
 [ "${out}" = "" ] || ng "$LINENO"
 
-# 空の入力を与えてエラーが発生するか確認
-out=$(echo "" | python3 kadai.py)
+# 引数が不足している場合
+out=$(python3 kadai.py)
 [ "$?" = 1 ] || ng "$LINENO"
 [ "${out}" = "" ] || ng "$LINENO"
 

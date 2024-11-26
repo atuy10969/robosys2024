@@ -1,4 +1,4 @@
-# kadai.py
+import sys
 
 def calculate_statistics(numbers):
     """
@@ -14,7 +14,11 @@ if __name__ == "__main__":
     numbers = input("いくつかの数値をスペースで区切って入力してください: ")
 
     # 入力を整数のリストに変換
-    number_list = [int(num) for num in numbers.split()]
+    try:
+        number_list = [int(num) for num in numbers.split()]
+    except ValueError:
+        print("数値以外の入力が含まれています。")
+        sys.exit(1)
 
     # 計算を実行
     max_number, min_number, average = calculate_statistics(number_list)
