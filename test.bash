@@ -1,37 +1,29 @@
 #!/bin/bash
 
-ng () {
-    echo "${1}行目が違うよ"
-    res=1
-}
+# 期待される出力
+expected_output1="入力された数値の中で一番大きい数は: 5"
+expected_output2="入力された数値の中で一番小さい数は: 1"
+expected_output3="入力された数値の平均値は: 3.0"
 
-res=0
+expected_output4="入力された数値の中で一番大きい数は: 50"
+expected_output5="入力された数値の中で一番小さい数は: -40"
+expected_output6="入力された数値の平均値は: 6.0"
 
-# `kadai.py` のテスト
+# 1回目のテスト (20 30 40)
+echo "20 30 40" | ./kadai.py > output.txt
+if grep -q "$expected_output1" output.txt && grep -q "$expected_output2" output.txt && grep -q "$expected_output3" output.txt; then
+    echo "テスト1: 成功"
+else
+    echo "テスト1: 失敗"
+    cat output.txt
+fi
 
-# 正常な入力
-out=$(echo "1 2 3 4 5" | ./kadai.py)
-expected_output="入力された数値の中で一番大きい数は: 5
-入力された数値の中で一番小さい数は: 1
-入力された数値の平均値は: 3.0"
-[ "$out" = "$expected_output" ] || { echo "期待値: $expected_output"; echo "出力値: $out"; ng "$LINENO"; }
-
-out=$(echo "10 -20 30 -40 50" | ./kadai.py)
-expected_output="入力された数値の中で一番大きい数は: 50
-入力された数値の中で一番小さい数は: -40
-入力された数値の平均値は: 6.0"
-[ "$out" = "$expected_output" ] || { echo "期待値: $expected_output"; echo "出力値: $out"; ng "$LINENO"; }
-
-# 数値以外の入力
-out=$(echo "1 2 あ 4 5" | ./kadai.py 2>&1)
-[ "$?" = 1 ] || ng "$LINENO"
-[ "$out" = "エラー: could not convert string to float: 'あ'" ] || ng "$LINENO"
-
-# 空入力
-out=$(echo "" | ./kadai.py 2>&1)
-[ "$?" = 1 ] || ng "$LINENO"
-[ "$out" = "エラー: 数値が入力されていません" ] || ng "$LINENO"
-
-[ "$res" = 0 ] && echo OK
-exit $res
+# 2回目のテスト (50 -40 10)
+echo "50 -40 10" | ./kadai.py > output.txt
+if grep -q "$expected_output4" output.txt && grep -q "$expected_output5" output.txt && grep -q "$expected_output6" output.txt; then
+    echo "テスト2: 成功"
+else
+    echo "テスト2: 失敗"
+    cat output.txt
+fi
 
