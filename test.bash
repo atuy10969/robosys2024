@@ -1,4 +1,4 @@
-i#!/bin/bash 
+#!/bin/bash 
 
 ng () {
     echo "${1}行目が違うよ"
