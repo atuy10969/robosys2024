@@ -23,8 +23,8 @@ for num in $input; do
   else
     echo "Error: 無効な入力: $num" >&2
     exit 1
-  fi
+fi
 done
 
 echo "$sum"
-i
+
