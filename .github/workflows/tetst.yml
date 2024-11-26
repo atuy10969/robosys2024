@@ -23,9 +23,16 @@ jobs:
           chmod +x ./average.txt || true
           chmod +x ./min.txt || true
           chmod +x ./max.txt || true
-          chmod +x ./test3.bash
+          chmod +x ./test.bash
 
       - name: テストを実行
         run: |
           set -e  # エラー発生時に中断
-          bash -x ./test3.bash  # デバッグ情報を表示
+          echo "Running tests with debug mode..."
+          {
+            bash -x ./test3.bash  # デバッグモードで実行
+          } || {
+            echo "::error::テストスクリプトの実行中にエラーが発生しました。"
+            exit 1
+          }
+
