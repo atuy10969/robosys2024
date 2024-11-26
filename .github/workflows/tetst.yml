@@ -1,38 +1,19 @@
-name: Run Tests
+name: test-kadai.py
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
+on: [push, pull_request]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: チェックアウトリポジトリ
+      - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: 必要なファイルを確認
-        run: ls -la
-
-      - name: 必要なファイルに実行権限を付与
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+      - name: Run tests
         run: |
-          chmod +x ./plus
-          chmod +x ./average.txt || true
-          chmod +x ./min.txt || true
-          chmod +x ./max.txt || true
-          chmod +x ./test.bash
-
-      - name: テストを実行
-        run: |
-          set -e  # エラー発生時に中断
-          echo "Running tests with debug mode..."
-          {
-            bash -x ./test3.bash  # デバッグモードで実行
-          } || {
-            echo "::error::テストスクリプトの実行中にエラーが発生しました。"
-            exit 1
-          }
-
+          chmod +x kadai.py
+          chmod +x test.bash
+          ./test.bash
