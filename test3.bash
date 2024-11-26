@@ -7,22 +7,29 @@ ng () {
 
 res=0
 
-# 足し算のテスト
-out=$(echo "10 20 30" | ./plus)
-[ "${out}" = "60.0" ] || ng "$LINENO"
+# `plus` のテスト
+out=$(seq 5 | ./plus)
+[ "${out}" = 15 ] || ng "$LINENO"
 
-# 平均値のテスト
-out=$(echo "10 20 30" | ./average.txt)
-[ "${out}" = "20.0" ] || ng "$LINENO"
+out=$(echo あ | ./plus)
+[ "$?" = 1 ] || ng "$LINENO"
+[ "${out}" = "" ] || ng "$LINENO"
 
-# 最小値のテスト
-out=$(echo "10 20 30" | ./min.txt)
-[ "${out}" = "10.0" ] || ng "$LINENO"
+out=$(echo | ./plus)
+[ "$?" = 1 ] || ng "$LINENO"
+[ "${out}" = "" ] || ng "$LINENO"
 
-# 最大値のテスト
-out=$(echo "10 20 30" | ./max.txt)
-[ "${out}" = "30.0" ] || ng "$LINENO"
+# `average` のテスト
+out=$(seq 5 | ./average.txt)
+[ "${out}" = "3.0" ] || ng "$LINENO"  # 1+2+3+4+5 = 15; 平均は 15/5 = 3.0
+
+out=$(echo あ | ./average.txt)
+[ "$?" = 1 ] || ng "$LINENO"
+[ "${out}" = "" ] || ng "$LINENO"
+
+out=$(echo | ./average.txt)
+[ "$?" = 1 ] || ng "$LINENO"
+[ "${out}" = "" ] || ng "$LINENO"
 
 [ "$res" = 0 ] && echo OK
 exit $res
-
