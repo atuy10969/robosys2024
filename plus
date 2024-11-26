@@ -1,21 +1,18 @@
-#!/usr/bin/python3
-import sys
+#!/bin/bash
 
-def tonum(s):
-    try:
-        return int(s)
-    except ValueError:
-        try:
-            return float(s)
-        except ValueError:
-            print(f"Error: Invalid input '{s}'", file=sys.stderr)
-            exit(1)
+# 数値の合計を計算するスクリプト
 
-ans = 0
-for line in sys.stdin:
-    line = line.rstrip()
-    for num in line.split():
-        ans += tonum(num)
+# 入力が空の場合
+if [ -z "$1" ]; then
+  echo "Error: 入力が必要です" >&2
+  exit 1
+fi
 
-print(ans)
+# 数値の合計を計算
+sum=0
+for num in $1; do
+  sum=$((sum + num))
+done
+
+echo $sum
 

@@ -1,4 +1,4 @@
-i#!/bin/bash
+ii#!/bin/bash
 
 # ng関数を定義（エラー時に行番号を表示）
 ng () {
@@ -8,26 +8,57 @@ ng () {
 
 res=0
 
-# `kadai.py` のテスト
+# `plus` のテスト
+out=$(echo "1 2 3 4 5" | ./plus)
+if [ "$out" != "15" ]; then
+  ng "$LINENO"
+fi
 
-# 正常な入力を与えて、結果が期待通りかチェック
-out=$(echo "10 20 30 40 50" | python3 kadai.py)
-expected="入力された数値の中で一番大きい数は: 50
-入力された数値の中で一番小さい数は: 10
-入力された数値の平均値は: 30.0"
-[ "${out}" = "${expected}" ] || ng "$LINENO"
+out=$(echo "10.5 20.3" | ./plus)
+if [ "$out" != "30.8" ]; then
+  ng "$LINENO"
+fi
 
-# 無効な入力（文字列）を与えてエラーが発生するか確認
-out=$(echo "10 20 あ 40 50" | python3 kadai.py)
-[ "$?" = 1 ] || ng "$LINENO"
-[ "${out}" = "" ] || ng "$LINENO"
+out=$(echo "1 -2 3 -4 5" | ./plus)
+if [ "$out" != "3" ]; then
+  ng "$LINENO"
+fi
 
-# 引数が不足している場合
-out=$(python3 kadai.py)
-[ "$?" = 1 ] || ng "$LINENO"
-[ "${out}" = "" ] || ng "$LINENO"
+out=$(echo "あ" | ./plus)
+if [ "$?" != 1 ] || [ "$out" != "" ]; then
+  ng "$LINENO"
+fi
+
+out=$(echo "" | ./plus)  # 空入力
+if [ "$?" != 1 ] || [ "$out" != "" ]; then
+  ng "$LINENO"
+fi
+
+# `average` のテスト
+out=$(echo "1 2 3 4 5" | ./average.txt)
+if [ "$out" != "3.0" ]; then
+  ng "$LINENO"
+fi
+
+out=$(echo "10.5 20.3" | ./average.txt)
+if [ "$out" != "15.4" ]; then
+  ng "$LINENO"
+fi
+
+out=$(echo "あ" | ./average.txt)
+if [ "$?" != 1 ] || [ "$out" != "" ]; then
+  ng "$LINENO"
+fi
+
+out=$(echo "" | ./average.txt)  # 空入力
+if [ "$?" != 1 ] || [ "$out" != "" ]; then
+  ng "$LINENO"
+fi
 
 # 結果がすべて正常ならOKを表示
-[ "$res" = 0 ] && echo OK
+if [ "$res" = 0 ]; then
+  echo "OK"
+fi
+
 exit $res
 
