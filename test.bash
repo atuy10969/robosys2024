@@ -7,38 +7,35 @@ ng () {
 
 res=0
 
-# `plus` のテスト
-out=$(echo "1 2 3 4 5" | ./plus)
-[ "$out" = "15" ] || ng "$LINENO"
+# `kadai.py` のテスト
+# 正常な入力
+out=$(echo "1 2 3 4 5" | ./kadai.py)
+expected_output=$(cat <<EOL
+入力された数値の中で一番大きい数は: 5
+入力された数値の中で一番小さい数は: 1
+入力された数値の平均値は: 3.0
+EOL
+)
+[ "$out" = "$expected_output" ] || ng "$LINENO"
 
-out=$(echo "10.5 20.3" | ./plus)
-[ "$out" = "30.8" ] || ng "$LINENO"
+out=$(echo "10 -20 30 -40 50" | ./kadai.py)
+expected_output=$(cat <<EOL
+入力された数値の中で一番大きい数は: 50
+入力された数値の中で一番小さい数は: -40
+入力された数値の平均値は: 6.0
+EOL
+)
+[ "$out" = "$expected_output" ] || ng "$LINENO"
 
-out=$(echo "1 -2 3 -4 5" | ./plus)
-[ "$out" = "3" ] || ng "$LINENO"
-
-out=$(echo "あ" | ./plus)
+# 数値以外の入力
+out=$(echo "1 2 あ 4 5" | ./kadai.py)
 [ "$?" = 1 ] || ng "$LINENO"
-[ "$out" = "" ] || ng "$LINENO"
+[ "$out" = "数値以外の入力が含まれています。" ] || ng "$LINENO"
 
-out=$(echo "" | ./plus)  # 空入力
+# 空入力
+out=$(echo "" | ./kadai.py)
 [ "$?" = 1 ] || ng "$LINENO"
-[ "$out" = "" ] || ng "$LINENO"
-
-# `average` のテスト
-out=$(echo "1 2 3 4 5" | ./average.txt)
-[ "$out" = "3.0" ] || ng "$LINENO"
-
-out=$(echo "10.5 20.3" | ./average.txt)
-[ "$out" = "15.4" ] || ng "$LINENO"
-
-out=$(echo "あ" | ./average.txt)
-[ "$?" = 1 ] || ng "$LINENO"
-[ "$out" = "" ] || ng "$LINENO"
-
-out=$(echo "" | ./average.txt)  # 空入力
-[ "$?" = 1 ] || ng "$LINENO"
-[ "$out" = "" ] || ng "$LINENO"
+[ "$out" = "数値以外の入力が含まれています。" ] || ng "$LINENO"
 
 [ "$res" = 0 ] && echo OK
 exit $res
