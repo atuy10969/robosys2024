@@ -1,18 +1,30 @@
-#!/bin/bash
+i#!/bin/bash
 
-# 数値の合計を計算するスクリプト
+# 標準入力または引数で与えられた数値を合計するスクリプト
 
-# 入力が空の場合
-if [ -z "$1" ]; then
+# 入力を確認
+if [ -p /dev/stdin ]; then
+  input=$(cat /dev/stdin)
+else
+  input="$*"
+fi
+
+# 入力が空の場合、エラーを返す
+if [ -z "$input" ]; then
   echo "Error: 入力が必要です" >&2
   exit 1
 fi
 
-# 数値の合計を計算
+# 入力を合計
 sum=0
-for num in $1; do
-  sum=$((sum + num))
+for num in $input; do
+  if [[ "$num" =~ ^-?[0-9]+(\.[0-9]+)?$ ]]; then
+    sum=$(echo "$sum + $num" | bc)
+  else
+    echo "Error: 無効な入力: $num" >&2
+    exit 1
+  fi
 done
 
-echo $sum
+echo "$sum"
 

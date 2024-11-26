@@ -1,21 +1,33 @@
-#!/usr/bin/python3
-import sys
+ii#!/bin/bash
 
-def parse_numbers(line):
-    try:
-        return [float(num) for num in line.split()]
-    except ValueError as e:
-        print(f"Error: {e}", file=sys.stderr)
-        exit(1)
+# 標準入力または引数で与えられた数値の平均を計算するスクリプト
 
-numbers = []
-for line in sys.stdin:
-    numbers.extend(parse_numbers(line.strip()))
+# 入力を確認
+if [ -p /dev/stdin ]; then
+  input=$(cat /dev/stdin)
+else
+  input="$*"
+fi
 
-if not numbers:
-    print("Error: No numbers provided", file=sys.stderr)
-    exit(1)
+# 入力が空の場合、エラーを返す
+if [ -z "$input" ]; then
+  echo "Error: 入力が必要です" >&2
+  exit 1
+fi
 
-average = sum(numbers) / len(numbers)
-print(average)
+# 入力を処理して平均を計算
+sum=0
+count=0
+for num in $input; do
+  if [[ "$num" =~ ^-?[0-9]+(\.[0-9]+)?$ ]]; then
+    sum=$(echo "$sum + $num" | bc)
+    count=$((count + 1))
+  else
+    echo "Error: 無効な入力: $num" >&2
+    exit 1
+  fi
+done
+
+average=$(echo "$sum / $count" | bc -l)
+echo "$average"
 
