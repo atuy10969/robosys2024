@@ -5,6 +5,9 @@ def calculate_statistics(numbers):
     """
     数値のリストから最大値、最小値、平均値を計算する。
     """
+    if not numbers:  # 空リストのチェック
+        raise ValueError("数値が入力されていません")
+    
     max_number = max(numbers)
     min_number = min(numbers)
     average = sum(numbers) / len(numbers)
@@ -17,8 +20,10 @@ if __name__ == "__main__":
     # 入力を整数のリストに変換
     try:
         number_list = [int(num) for num in numbers.split()]
-    except ValueError:
-        print("数値以外の入力が含まれています。")
+        if not number_list:  # 空リストのチェック
+            raise ValueError("数値が入力されていません")
+    except ValueError as e:
+        print(f"エラー: {e}")
         sys.exit(1)
 
     # 計算を実行
@@ -28,3 +33,4 @@ if __name__ == "__main__":
     print("入力された数値の中で一番大きい数は:", max_number)
     print("入力された数値の中で一番小さい数は:", min_number)
     print("入力された数値の平均値は:", average)
+
