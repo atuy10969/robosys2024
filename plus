@@ -4,13 +4,17 @@ import sys
 def tonum(s):
     try:
         return int(s)
-    except:
-        return float(s)
+    except ValueError:
+        try:
+            return float(s)
+        except ValueError:
+            print(f"Error: Invalid input '{s}'", file=sys.stderr)
+            exit(1)
 
 ans = 0
 for line in sys.stdin:
     line = line.rstrip()
-    for num in line.split():  # 各行の数値をスペースで分割して処理
+    for num in line.split():
         ans += tonum(num)
 
 print(ans)

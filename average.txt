@@ -2,16 +2,20 @@
 import sys
 
 def parse_numbers(line):
-    return [float(num) for num in line.split()]
+    try:
+        return [float(num) for num in line.split()]
+    except ValueError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        exit(1)
 
 numbers = []
 for line in sys.stdin:
     numbers.extend(parse_numbers(line.strip()))
 
-if len(numbers) > 0:
-    average = sum(numbers) / len(numbers)
-    print(average)
-else:
+if not numbers:
     print("Error: No numbers provided", file=sys.stderr)
-    sys.exit(1)
+    exit(1)
+
+average = sum(numbers) / len(numbers)
+print(average)
 

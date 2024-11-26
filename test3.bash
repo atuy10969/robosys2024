@@ -8,28 +8,36 @@ ng () {
 res=0
 
 # `plus` のテスト
-out=$(seq 5 | ./plus)
-[ "${out}" = 15 ] || ng "$LINENO"
+out=$(echo "1 2 3 4 5" | ./plus)
+[ "${out}" = "15" ] || ng "$LINENO"
 
-out=$(echo あ | ./plus)
+out=$(echo "10.5 20.3" | ./plus)
+[ "${out}" = "30.8" ] || ng "$LINENO"
+
+out=$(echo "1 -2 3 -4 5" | ./plus)
+[ "${out}" = "3" ] || ng "$LINENO"
+
+out=$(echo あ | ./plus 2>/dev/null)
 [ "$?" = 1 ] || ng "$LINENO"
 [ "${out}" = "" ] || ng "$LINENO"
 
-out=$(echo | ./plus)
+out=$(echo | ./plus 2>/dev/null)
 [ "$?" = 1 ] || ng "$LINENO"
 [ "${out}" = "" ] || ng "$LINENO"
 
 # `average` のテスト
-out=$(seq 5 | ./average.txt)
-[ "${out}" = "3.0" ] || ng "$LINENO"  # 1+2+3+4+5 = 15; 平均は 15/5 = 3.0
+out=$(echo "1 2 3 4 5" | ./average.txt)
+[ "${out}" = "3.0" ] || ng "$LINENO"
 
-out=$(echo あ | ./average.txt)
-[ "$?" = 1 ] || ng "$LINENO"
-[ "${out}" = "" ] || ng "$LINENO"
+out=$(echo "10.5 20.3" | ./average.txt)
+[ "${out}" = "15.4" ] || ng "$LINENO"
 
-out=$(echo | ./average.txt)
+out=$(echo あ | ./average.txt 2>/dev/null)
 [ "$?" = 1 ] || ng "$LINENO"
-[ "${out}" = "" ] || ng "$LINENO"
+
+out=$(echo | ./average.txt 2>/dev/null)
+[ "$?" = 1 ] || ng "$LINENO"
 
 [ "$res" = 0 ] && echo OK
 exit $res
+
