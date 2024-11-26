@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 
 ng () {
     echo "${1}行目が違うよ"
@@ -33,4 +33,3 @@ out=$(echo | ./average.txt)
 
 [ "$res" = 0 ] && echo OK
 exit $res
-
