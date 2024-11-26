@@ -7,6 +7,10 @@ ng () {
 
 res=0
 
+# 足し算のテスト
+out=$(echo "10 20 30" | ./plus)
+[ "${out}" = "60.0" ] || ng "$LINENO"
+
 # 平均値のテスト
 out=$(echo "10 20 30" | ./average.txt)
 [ "${out}" = "20.0" ] || ng "$LINENO"
