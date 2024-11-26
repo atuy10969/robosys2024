@@ -1,4 +1,4 @@
-i#!/bin/bash
+#!/bin/bash
 
 # 標準入力または引数で与えられた数値を合計するスクリプト
 
@@ -27,4 +27,4 @@ for num in $input; do
 done
 
 echo "$sum"
-
+i
