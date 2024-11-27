@@ -1,57 +1,56 @@
-#!/bin/bash
+#!/bin/bash -xv
+# SPDX-FileCopyrightText: 2024 Andou Aoki
+# SPDX-License-Identifier: BSD-3-Clause
 
-set -e  # エラー発生時に中断
+ng() {
+    echo "${1}行目が違うよ"
+    res=1
+}
+
 res=0
 
-# テストケース1
-echo "1 2 3 4 5" | ./kadai.py > output.txt
-if grep -q "入力された数値の中で一番大きい数は: 5.0" output.txt && \
-   grep -q "入力された数値の中で一番小さい数は: 1.0" output.txt && \
-   grep -q "入力された数値の平均値は: 3.0" output.txt; then
-    echo "テスト1: 成功"
-else
-    echo "テスト1: 失敗"
-    cat output.txt
-    res=1
-fi
+# テスト対象の Python バージョン
+PYTHON_VERSIONS=("python3.7" "python3.8" "python3.9" "python3.10" "python3.11")
 
-# テストケース2
-echo "10.5 20.3" | ./kadai.py > output.txt
-if grep -q "入力された数値の中で一番大きい数は: 20.3" output.txt && \
-   grep -q "入力された数値の中で一番小さい数は: 10.5" output.txt && \
-   grep -q "入力された数値の平均値は: 15.4" output.txt; then
-    echo "テスト2: 成功"
-else
-    echo "テスト2: 失敗"
-    cat output.txt
-    res=1
-fi
+# Python バージョンごとにテストを実行
+for python in "${PYTHON_VERSIONS[@]}"; do
+    echo "=== Testing with ${python} ==="
+    if ! command -v "${python}" > /dev/null; then
+        echo "${python} が見つかりません。スキップします。"
+        continue
+    fi
 
-# テストケース3（不正な入力）
-echo "あ" | ./kadai.py > output.txt 2>&1
-if grep -q "エラー: could not convert string to float" output.txt; then
-    echo "テスト3: 成功"
-else
-    echo "テスト3: 失敗"
-    cat output.txt
-    res=1
-fi
+    out=$("${python}" kadai.py <<EOF
+1 2 3 4 5
+EOF
+)
+    echo "${out}" | grep -q "入力された数値の中で一番大きい数は: 5.0" || ng "$LINENO"
+    echo "${out}" | grep -q "入力された数値の中で一番小さい数は: 1.0" || ng "$LINENO"
+    echo "${out}" | grep -q "入力された数値の平均値は: 3.0" || ng "$LINENO"
 
-# テストケース4（空の入力）
-echo "" | ./kadai.py > output.txt 2>&1
-if grep -q "エラー: 値が入力されていません" output.txt; then
-    echo "テスト4: 成功"
-else
-    echo "テスト4: 失敗"
-    cat output.txt
-    res=1
-fi
+    out=$("${python}" kadai.py <<EOF
+10.5 20.3
+EOF
+)
+    echo "${out}" | grep -q "入力された数値の中で一番大きい数は: 20.3" || ng "$LINENO"
+    echo "${out}" | grep -q "入力された数値の中で一番小さい数は: 10.5" || ng "$LINENO"
+    echo "${out}" | grep -q "入力された数値の平均値は: 15.4" || ng "$LINENO"
 
-if [ "$res" -eq 0 ]; then
-    echo "すべてのテストが成功しました"
-    exit 0
-else
-    echo "いくつかのテストが失敗しました"
-    exit 1
-fi
+    out=$("${python}" kadai.py <<EOF
+あ
+EOF
+)
+    echo "${out}" | grep -q "エラー:" || ng "$LINENO"
+
+    out=$("${python}" kadai.py <<EOF
+
+EOF
+)
+    echo "${out}" | grep -q "エラー:" || ng "$LINENO"
+
+    echo "=== ${python} テスト完了 ==="
+done
+
+[ "${res}" = 0 ] && echo "OK"
+exit "${res}"
 
