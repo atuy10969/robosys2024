@@ -1,38 +1,12 @@
-iname: Python Test
-
-on: 
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
+name: test
+on: push
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
-
+        python-version: ["3,7","3,8","3,9","3,10","3.11"]
     steps:
-      # コードをチェックアウト
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      # 必要な Python バージョンをセットアップ
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      # 必要な依存関係をインストール（必要に応じて記載）
-      - name: Install dependencies
-        run: |
-          python --version
-          pip install --upgrade pip
-
-      # テストスクリプトを実行
-      - name: Run all tests
-        run: bash -xv ./test.bash
-
+    - uses: actions/checkout@v3
+    - name: All test
+      run: bash -xv ./test.bash
