@@ -1,20 +1,38 @@
-name: test-kadai.py
+iname: Python Test
 
-on: [push, pull_request]
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+
     steps:
+      # コードをチェックアウト
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Setup Python
+
+      # 必要な Python バージョンをセットアップ
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
-          python-version: "3.x"
-      - name: Run tests
+          python-version: ${{ matrix.python-version }}
+
+      # 必要な依存関係をインストール（必要に応じて記載）
+      - name: Install dependencies
         run: |
-          chmod +x kadai.py
-          chmod +x test.bash
-          ./test.bash
+          python --version
+          pip install --upgrade pip
+
+      # テストスクリプトを実行
+      - name: Run all tests
+        run: bash -xv ./test.bash
 
