@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-
+# SPDX-FileCopyrightText: 2024 s23C1041LJ@s.chibakoudai.jp>
+# SPDX-License-Identifier: BSD-3-Clause
 try:
     numbers = input("いくつかの数値をスペースで区切って入力してください: ")  # 標準入力を受け付け
     numbers = list(map(float, numbers.split()))  # 入力された数値を分割してリストに変換
