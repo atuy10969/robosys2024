@@ -1,4 +1,4 @@
-#!/bin/bash -xv
+i#!/bin/bash -xv
 # SPDX-FileCopyrightText: 2024 s23C1041LJ@s.chibakoudai.jp
 # SPDX-License-Identifier: BSD-3-Clause
 
@@ -20,32 +20,21 @@ for python in "${PYTHON_VERSIONS[@]}"; do
         continue
     fi
 
-    out=$("${python}" kadai.py <<EOF
-1 2 3 4 5
-EOF
-)
+    # 数値をコマンドライン引数として渡す
+    out=$("${python}" kadai.py 1 2 3 4 5)
     echo "${out}" | grep -q "入力された数値の中で一番大きい数は: 5.0" || ng "$LINENO"
     echo "${out}" | grep -q "入力された数値の中で一番小さい数は: 1.0" || ng "$LINENO"
     echo "${out}" | grep -q "入力された数値の平均値は: 3.0" || ng "$LINENO"
 
-    out=$("${python}" kadai.py <<EOF
-10.5 20.3
-EOF
-)
+    out=$("${python}" kadai.py 10.5 20.3)
     echo "${out}" | grep -q "入力された数値の中で一番大きい数は: 20.3" || ng "$LINENO"
     echo "${out}" | grep -q "入力された数値の中で一番小さい数は: 10.5" || ng "$LINENO"
     echo "${out}" | grep -q "入力された数値の平均値は: 15.4" || ng "$LINENO"
 
-    out=$("${python}" kadai.py <<EOF
-あ
-EOF
-)
+    out=$("${python}" kadai.py あ)
     echo "${out}" | grep -q "エラー:" || ng "$LINENO"
 
-    out=$("${python}" kadai.py <<EOF
-
-EOF
-)
+    out=$("${python}" kadai.py)
     echo "${out}" | grep -q "エラー:" || ng "$LINENO"
 
     echo "=== ${python} テスト完了 ==="
@@ -53,3 +42,4 @@ done
 
 [ "${res}" = 0 ] && echo "OK"
 exit "${res}"
+

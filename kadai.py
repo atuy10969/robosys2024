@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2024 s23C1041LJ@s.chibakoudai.jp>
 # SPDX-License-Identifier: BSD-3-Clause
-try:
-    numbers = input("いくつかの数値をスペースで区切って入力してください: ")  # 標準入力を受け付け
-    numbers = list(map(float, numbers.split()))  # 入力された数値を分割してリストに変換
 
-    if not numbers:  # 入力が空の場合
+import sys
+
+try:
+    # コマンドライン引数を取得（スクリプト名を除いた引数）
+    numbers = sys.argv[1:]
+
+    if not numbers:  # 引数が空の場合
         raise ValueError("値が入力されていません。")
+
+    # 数値をリストに変換
+    numbers = list(map(float, numbers))
 
     # 数値をそのまま使用
     max_num = max(numbers)
@@ -20,3 +26,4 @@ try:
 
 except ValueError as e:
     print(f"エラー: {e}")
+
