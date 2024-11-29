@@ -20,6 +20,7 @@ for python in "${PYTHON_VERSIONS[@]}"; do
         continue
     fi
 
+    # 基本的な数値入力
     out=$("${python}" kadai.py <<EOF
 1 2 3 4 5
 EOF
@@ -28,6 +29,7 @@ EOF
     echo "${out}" | grep -q "入力された数値の中で一番小さい数は: 1.0" || ng "$LINENO"
     echo "${out}" | grep -q "入力された数値の平均値は: 3.0" || ng "$LINENO"
 
+    # 小数の入力
     out=$("${python}" kadai.py <<EOF
 10.5 20.3
 EOF
@@ -36,12 +38,23 @@ EOF
     echo "${out}" | grep -q "入力された数値の中で一番小さい数は: 10.5" || ng "$LINENO"
     echo "${out}" | grep -q "入力された数値の平均値は: 15.4" || ng "$LINENO"
 
+    # π を含む入力
+    out=$("${python}" kadai.py <<EOF
+π 3π+4
+EOF
+)
+    echo "${out}" | grep -q "入力された数値の中で一番大きい数は: 13.42477796076938" || ng "$LINENO"
+    echo "${out}" | grep -q "入力された数値の中で一番小さい数は: 3.141592653589793" || ng "$LINENO"
+    echo "${out}" | grep -q "入力された数値の平均値は: 8.283185307179586" || ng "$LINENO"
+
+    # 無効な入力
     out=$("${python}" kadai.py <<EOF
 あ
 EOF
 )
     echo "${out}" | grep -q "エラー:" || ng "$LINENO"
 
+    # 空の入力
     out=$("${python}" kadai.py <<EOF
 
 EOF
