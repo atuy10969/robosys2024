@@ -21,20 +21,20 @@ for python in "${PYTHON_VERSIONS[@]}"; do
     fi
 
     # 数値をコマンドライン引数として渡す
-    out=$("${python}" kadai.py 1 2 3 4 5)
+    out=$("${python}" number_stats.py 1 2 3 4 5)
     echo "${out}" | grep -q "入力された数値の中で一番大きい数は: 5.0" || ng "$LINENO"
     echo "${out}" | grep -q "入力された数値の中で一番小さい数は: 1.0" || ng "$LINENO"
     echo "${out}" | grep -q "入力された数値の平均値は: 3.0" || ng "$LINENO"
 
-    out=$("${python}" kadai.py 10.5 20.3)
+    out=$("${python}" number_stats.py 10.5 20.3)
     echo "${out}" | grep -q "入力された数値の中で一番大きい数は: 20.3" || ng "$LINENO"
     echo "${out}" | grep -q "入力された数値の中で一番小さい数は: 10.5" || ng "$LINENO"
     echo "${out}" | grep -q "入力された数値の平均値は: 15.4" || ng "$LINENO"
 
-    out=$("${python}" kadai.py あ)
+    out=$("${python}" number_stats.py あ)
     echo "${out}" | grep -q "エラー:" || ng "$LINENO"
 
-    out=$("${python}" kadai.py)
+    out=$("${python}" number_stats.py)
     echo "${out}" | grep -q "エラー:" || ng "$LINENO"
 
     echo "=== ${python} テスト完了 ==="
