@@ -46,10 +46,12 @@ cd tmp/robosys2024
 
 上記に示している成功例1~3と失敗例の通り、数字の大文字、スペースはどれだけ開けてもしっかり結果を出すことはできているが、ひらがなのような文字を入力してしまった場合エラーを出してどこがエラーなのかを表示できるようになっている。
 
-# テスト環境
+# テスト環境*
 ubuntu20.04
 # 参考資料
-*　[テスト実行・・・・ロボットシステム学（11/7スライド）]https://ryuichiueda.github.io/slides_marp/robosys2024/lesson7.html#12
+*　[テスト実行・・・・ロボットシステム学（11/7スライド）]https://ryuichiueda.github.io/slides_marp/robosys2024/lesson7.html
+*  [sys.argvの使い方完全ガイド【Python初心者向け】]https://dtnavi.tcdigital.jp/cat_system/language_184/
+*  [ コマンドライン引数の使い方（sys.argv）]https://hibiki-press.tech/python/commandline_argv/1093
 
 
 
