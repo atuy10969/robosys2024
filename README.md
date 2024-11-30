@@ -15,7 +15,7 @@ git clone https://github.com/atuy10969/robosys2024.git
 cd tmp/robosys2024
 
 ## 実行
-./kadai.py
+./number_status.py
 
 ### 終了について
 １回数字を入力して結果を出すと勝手に終了するようになっています。
@@ -49,6 +49,7 @@ cd tmp/robosys2024
 # テスト環境
 ubuntu20.04
 # 参考資料
+*　[テスト実行・・・・ロボットシステム学（11/7スライド）]https://ryuichiueda.github.io/slides_marp/robosys2024/lesson7.html#12
 
 
 
