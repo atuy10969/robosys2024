@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-# SPDX-FileCopyrightText: 2024 s23C1041LJ@s.chibakoudai.jp>
+#!/usr/bin/python3
+# SPDX-FileCopyrightText: 2024 <s23C1041LJ@s.chibakoudai.jp>
 # SPDX-License-Identifier: BSD-3-Clause
 
 import sys
@@ -8,7 +8,7 @@ try:
     # コマンドライン引数を取得（スクリプト名を除いた引数）
     numbers = sys.argv[1:]
 
-    if not numbers:  # 引数が空の場合
+    if not numbers:  
         raise ValueError("値が入力されていません。")
 
     # 数値をリストに変換
