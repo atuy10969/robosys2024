@@ -51,16 +51,13 @@ cd tmp/robosys2024
 # テスト環境*
 ubuntu20.04
 # 参考資料
-*　[テスト実行・・・・ロボットシステム学（11/7スライド）]https://ryuichiueda.github.io/slides_marp/robosys2024/lesson7.html
-*  [sys.argvの使い方完全ガイド【Python初心者向け】]https://dtnavi.tcdigital.jp/cat_system/language_184/
-*  [ コマンドライン引数の使い方（sys.argv）]https://hibiki-press.tech/python/commandline_argv/1093
-*  [ワークフロー状態バッジの追加]https://docs.github.com/ja/actions/monitoring-and-troubleshooting-workflows/monitoring-workflows/adding-a-workflow-status-badge
-
-#ライセンスと著作権
+* [テスト実行・・・・ロボットシステム学（11/7スライド）](https://ryuichiueda.github.io/slides_marp/robosys2024/lesson7.html)
+* [sys.argvの使い方完全ガイド【Python初心者向け】](https://dtnavi.tcdigital.jp/cat_system/language_184/)
+* [ コマンドライン引数の使い方（sys.argv）](https://hibiki-press.tech/python/commandline_argv/1093)
+* [ワークフロー状態バッジの追加](https://docs.github.com/ja/actions/monitoring-and-troubleshooting-workflows/monitoring-workflows/adding-a-workflow-status-badge)
+# ライセンスと著作権
 ・このソフトウェアパッケージは, 3条項BSDライセンスの下, 再頒布および使用が許可されます.
 ・このパッケージのコードの一部は、（CC-BY－SA 4.0 by Ryuichi Ueda)のものを、本人の許可を得て自身の著作としたものです。
-~~~
 https://github.com/ryuichiueda/my_slides/tree/master/robosys_2024
-~~~
 ・© 2024 Yuta Kannaka
 
