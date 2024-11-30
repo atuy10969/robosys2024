@@ -64,7 +64,7 @@ ubuntu20.04
 # ライセンスと著作権
 ・このソフトウェアパッケージは, 3条項BSDライセンスの下, 再頒布および使用が許可されます.
 
-・このパッケージのコードの一部は,(CC-BY－SA 4.0 by Ryuichi Ueda)のものを本人の許可を得て自身の著作としたものです。
+・このパッケージのコードの一部は, 下記のスライド(CC-BY－SA 4.0 by Ryuichi Ueda)のものを本人の許可を得て自身の著作としたものです。
 https://github.com/ryuichiueda/my_slides/tree/master/robosys_2024
 
 ・© 2024 Yuta Kannaka
