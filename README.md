@@ -9,7 +9,7 @@ Python
   
 # インストール方法
 ~~~
-git clone https://github.com/atuy10969/robosys2024.git
+git clone https://github.com/atuy10969/robosys2024
 ~~~
 ## リポジトリ
 ~~~
@@ -54,6 +54,7 @@ ubuntu20.04
 *　[テスト実行・・・・ロボットシステム学（11/7スライド）]https://ryuichiueda.github.io/slides_marp/robosys2024/lesson7.html
 *  [sys.argvの使い方完全ガイド【Python初心者向け】]https://dtnavi.tcdigital.jp/cat_system/language_184/
 *  [ コマンドライン引数の使い方（sys.argv）]https://hibiki-press.tech/python/commandline_argv/1093
+*  [ワークフロー状態バッジの追加]https://docs.github.com/ja/actions/monitoring-and-troubleshooting-workflows/monitoring-workflows/adding-a-workflow-status-badge
 
 #ライセンスと著作権
 ・このソフトウェアパッケージは, 3条項BSDライセンスの下, 再頒布および使用が許可されます.
@@ -61,4 +62,5 @@ ubuntu20.04
 ~~~
 https://github.com/ryuichiueda/my_slides/tree/master/robosys_2024
 ~~~
+・© 2024 Yuta Kannaka
 
