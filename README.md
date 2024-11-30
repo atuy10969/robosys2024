@@ -12,11 +12,13 @@ Python
 git clone https://github.com/atuy10969/robosys2024.git
 ~~~
 ## リポジトリ
+~~~
 cd tmp/robosys2024
-
+~~~
 ## 実行
+~~~
 ./number_status.py
-
+~~~
 ### 終了について
 １回数字を入力して結果を出すと勝手に終了するようになっています。
 
@@ -53,7 +55,10 @@ ubuntu20.04
 *  [sys.argvの使い方完全ガイド【Python初心者向け】]https://dtnavi.tcdigital.jp/cat_system/language_184/
 *  [ コマンドライン引数の使い方（sys.argv）]https://hibiki-press.tech/python/commandline_argv/1093
 
-
-
-
+#ライセンスと著作権
+・このソフトウェアパッケージは, 3条項BSDライセンスの下, 再頒布および使用が許可されます.
+・このパッケージのコードの一部は、（CC-BY－SA 4.0 by Ryuichi Ueda)のものを、本人の許可を得て自身の著作としたものです。
+~~~
+https://github.com/ryuichiueda/my_slides/tree/master/robosys_2024
+~~~
 
